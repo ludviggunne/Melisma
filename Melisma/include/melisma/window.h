@@ -1,0 +1,42 @@
+#pragma once
+
+#include "core.h"
+
+#include <functional>
+
+#include "event/event.h"
+#include "delta_time.h"
+#include "keycodes.h"
+
+namespace melisma {
+
+	class melismaAPI Window {
+
+		using EventCallbackFn = std::function<void(Event &)>;
+		
+	public:
+		Window(int width = 800, int height = 600, const char *title = "Melisma Application");
+		~Window();
+
+		void SetEventCallback(const EventCallbackFn &callback) { m_UserData.EventCallback = callback; }
+
+		void OnUpdate(const DeltaTime &) const;
+
+		void SetResizable(bool resizable) const;
+		void SetSize(int width, int height);
+
+		void GetFrameBufferSize(int &width, int &height) const;
+
+		bool IsKeyPressed(KeyCode keyCode) const;
+
+	private:
+		void *m_NativeHandle;
+
+		struct UserData {
+			int Width;
+			int Height;
+			
+			EventCallbackFn EventCallback;
+		} m_UserData;
+	};
+}

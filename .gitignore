@@ -1,0 +1,12 @@
+# Directories
+.vs/
+bin/
+obj/
+sandbox/debugdir/textures/
+
+# Files
+*.user
+GenerateProjects.bat
+*.sln
+*.filters
+*.vcxproj

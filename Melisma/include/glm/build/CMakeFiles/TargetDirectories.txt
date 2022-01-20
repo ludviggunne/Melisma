@@ -1,0 +1,3 @@
+C:/vclib/build/glm/glm/build/CMakeFiles/INSTALL.dir
+C:/vclib/build/glm/glm/build/CMakeFiles/ALL_BUILD.dir
+C:/vclib/build/glm/glm/build/CMakeFiles/ZERO_CHECK.dir
