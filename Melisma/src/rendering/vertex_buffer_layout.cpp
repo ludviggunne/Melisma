@@ -1,4 +1,4 @@
-#include "rendering/vertex_buffer_layout.h"
+#include "melisma/rendering/vertex_buffer_layout.h"
 
 #include "glad/glad.h"
 

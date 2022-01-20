@@ -1,5 +1,5 @@
 #pragma once
-#include "core.h"
+#include "melisma/core.h"
 
 void GLClearError();
 bool GLLogCall(const char *, const char *, int);

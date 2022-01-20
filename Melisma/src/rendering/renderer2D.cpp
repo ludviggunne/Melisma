@@ -1,4 +1,4 @@
-#include "rendering/renderer2D.h"
+#include "melisma/rendering/renderer2D.h"
 
 #include <sstream>
 #include <fstream>
@@ -16,7 +16,7 @@ namespace melisma {
 
 	Renderer2D::Renderer2D()
 	{ 
-		m_VAO = std::make_shared<VertexArrayObject>(DefaultVertexBufferLayout<Vertex>());
+		m_VAO = Ref<VertexArrayObject>(DefaultVertexBufferLayout<Vertex>());
 		SetBatchSize(1000);
 		SetViewport(Viewport(0, 0, 800, 600));
 

@@ -1,10 +1,10 @@
 #pragma once
-#include "core.h"
-#include "delta_time.h"
+#include "melisma/core.h"
+#include "melisma/delta_time.h"
 
-#include "event/key_event.h"
-#include "event/mouse_event.h"
-#include "event/window_event.h"
+#include "melisma/event/key_event.h"
+#include "melisma/event/mouse_event.h"
+#include "melisma/event/window_event.h"
 
 // IMPL
 namespace melisma {

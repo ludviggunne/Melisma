@@ -1,6 +1,6 @@
-#include "layer/layer_stack.h"
+#include "melisma/layer/layer_stack.h"
 
-#include "core.h"
+#include "melisma/core.h"
 
 namespace melisma {
 

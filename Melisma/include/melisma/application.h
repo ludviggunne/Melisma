@@ -2,6 +2,8 @@
 
 #include "core.h"
 
+#include "pointers.h"
+
 #include "window.h"
 #include "layer/layer_stack.h"
 

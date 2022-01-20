@@ -1,4 +1,4 @@
-#include "rendering/texture.h"
+#include "melisma/rendering/texture.h"
 
 #include "stb_image.h"
 #include "glad/glad.h"

@@ -1,4 +1,4 @@
-#include "rendering/index_buffer.h"
+#include "melisma/rendering/index_buffer.h"
 
 #include "glcall.h"
 

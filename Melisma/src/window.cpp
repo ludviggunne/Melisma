@@ -1,9 +1,9 @@
-#include "window.h"
-#include "core.h"
+#include "melisma/window.h"
+#include "melisma/core.h"
 
-#include "event/window_event.h"
-#include "event/key_event.h"
-#include "event/mouse_event.h"
+#include "melisma/event/window_event.h"
+#include "melisma/event/key_event.h"
+#include "melisma/event/mouse_event.h"
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"

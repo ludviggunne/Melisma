@@ -1,4 +1,4 @@
-#include "rendering/shader_program.h"
+#include "melisma/rendering/shader_program.h"
 #include "glcall.h"
 
 #include "glad/glad.h"

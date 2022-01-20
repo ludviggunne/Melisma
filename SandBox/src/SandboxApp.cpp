@@ -64,8 +64,8 @@ public:
 		//m_Window->GetFrameBufferSize(width, height);
 		renderer.SetViewport({ 0, 0, 2 * width, 2 * height });
 
-		width *= 1.5;
-		height *= 1.5;
+		width *= 1.5f;
+		height *= 1.5f;
 
 		while (m_Running) { 
 			renderer.Clear(glm::vec4(glm::vec3(0.2f), 0.2f));

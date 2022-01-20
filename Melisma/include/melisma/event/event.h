@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core.h"
+#include "melisma/core.h"
 
 // TODO: Implement event cathegory
 

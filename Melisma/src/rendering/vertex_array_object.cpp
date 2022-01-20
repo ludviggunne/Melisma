@@ -1,4 +1,4 @@
-#include "rendering/vertex_array_object.h"
+#include "melisma/rendering/vertex_array_object.h"
 
 #include "glad/glad.h"
 

@@ -1,4 +1,4 @@
-#include "rendering/vertex_buffer.h"
+#include "melisma/rendering/vertex_buffer.h"
 
 #include "glcall.h"
 

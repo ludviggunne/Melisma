@@ -35,7 +35,6 @@ workspace "Melisma"
 
         includedirs {
             "%{prj.name}/include",
-            "%{prj.name}/include/melisma",
 
             "%{prj.name}/dependencies/glad/include",
             "%{prj.name}/dependencies/stbi/include",

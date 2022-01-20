@@ -1,5 +1,6 @@
 #pragma once
 #include "melisma/core.h"
+#include "melisma/pointers.h"
 
 #include "vertex.h"
 #include "vertex_array_object.h"
