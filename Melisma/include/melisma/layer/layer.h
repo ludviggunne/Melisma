@@ -11,7 +11,7 @@ namespace melisma {
 
 	class melismaAPI Layer { 
 	public:
-		Layer() {}
+		Layer() : m_DebugName("melismaLayerDebugName0") {}
 		virtual ~Layer() {}
 
 		virtual void OnAttach() {}

@@ -74,7 +74,7 @@ public:
 
 			renderer.BeginScene();
 
-			for (int i = textures.size() - 1; i > 0; i--) {
+			for (int i = (int)textures.size() - 1; i > 0; i--) {
 				int offset = (int)((textures.size() - i) * tOffset / textures.size());
 				offset %= width;
 
@@ -82,17 +82,17 @@ public:
 					{-width + offset, 0},
 					{ width, height },
 					{1.0f, 1.0f, 1.0f, 1.0f},
-					i);
+					(float)i);
 				renderer.DrawQuad(
 					{ offset, 0 },
 					{ width, height },
 					{ 1.0f, 1.0f, 1.0f, 1.0f },
-					i);
+					(float)i);
 				renderer.DrawQuad(
 					{ width + offset, 0 },
 					{ width, height },
 					{ 1.0f, 1.0f, 1.0f, 1.0f },
-					i);
+					(float)i);
 			}
 
 			renderer.EndScene();
