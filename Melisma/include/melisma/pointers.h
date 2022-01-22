@@ -2,8 +2,10 @@
 #include "core.h"
 //#include "core.h"
 
-#if 0
-#define mlLogRef(msg) mlLog(msg)
+#define TYPE(type) #type
+
+#if 1
+#define mlLogRef(msg) mlLog("Ref<T>: " << msg)
 #else
 #define mlLogRef(msg)
 #endif
@@ -21,6 +23,8 @@ namespace melisma {
 			m_Instance = new T(args...);
 			m_Refs     = new unsigned int;
 			*m_Refs    = 1;
+
+			mlLogRef("Created");
 		}
 
 		Ref(T *&&ptr) : Ref()
@@ -39,6 +43,8 @@ namespace melisma {
 			if (*m_Refs == 0) {
 				delete m_Refs;
 				delete m_Instance;
+
+				mlLogRef("No references left, deleting data.");
 			}
 		}
 
@@ -50,6 +56,7 @@ namespace melisma {
 			m_Refs     = ref.m_Refs;
 
 			(*m_Refs)++;
+			mlLogRef("lvalue copy, refs = " << *m_Refs);
 		}
 
 		Ref(Ref &&ref) noexcept : Ref()
@@ -58,6 +65,7 @@ namespace melisma {
 			m_Refs     = ref.m_Refs;
 
 			(*m_Refs)++;
+			mlLogRef("rvalue copy, refs = " << *m_Refs);
 		}
 
 		Ref &operator=(const Ref &ref)
@@ -67,6 +75,7 @@ namespace melisma {
 				m_Refs     = ref.m_Refs;
 
 				(*m_Refs)++;
+				mlLogRef("lvalue assign, refs = " << *m_Refs);
 			}
 
 			return *this;
@@ -77,10 +86,13 @@ namespace melisma {
 				if (m_Instance)
 				{
 					(*m_Refs)--;
+					mlLogRef("Reassigned, refs = " << *m_Refs);
 
 					if (*m_Refs == 0) {
 						delete m_Refs;
 						delete m_Instance;
+
+						mlLogRef("No references left, deleting data.");
 					}
 				}
 
@@ -88,6 +100,7 @@ namespace melisma {
 				m_Refs     = ref.m_Refs;
 
 				(*m_Refs)++;
+				mlLogRef("rvalue assign, refs = " << *m_Refs);
 			}
 
 			return *this;

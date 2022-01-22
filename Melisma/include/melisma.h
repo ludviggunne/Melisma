@@ -14,5 +14,10 @@ int main() {
 	application->Run();
 
 	delete application;
+
+#if ML_DEBUG
+	std::cout << "Application finished, press enter to exit.";
+	std::cin.get();
+#endif
 }
 //---------------------------------------------------------------------------------------
