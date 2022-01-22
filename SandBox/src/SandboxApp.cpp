@@ -22,6 +22,7 @@ public:
 
 		/* Textures */
 		std::vector<Ref<Texture>> textures;
+		textures.reserve(13);
 		TextureSpecification tex_spec;
 
 		unsigned int white_data = 0xffffffff;
@@ -31,15 +32,15 @@ public:
 		mlLog(white_texture->_debugName);
 
 		tex_spec.colorSpace = ColorSpace::RGBA;
-		tex_spec.magFilter = Filter::NEAREST;
+		tex_spec.magFilter  = Filter::NEAREST;
 
 		for (int i = 0; i < 12; i++) {
 			auto path = std::format("textures/forest/Layer{:02d}.png", i);
 
-			auto texture = Ref<Texture>::Create(path.c_str(), tex_spec);
-			mlLog(texture->_debugName);
-			texture->BindToSlot(i + 1);
-			textures.push_back(texture);
+			
+			textures.push_back(Ref<Texture>::Create(path.c_str(), tex_spec));
+			mlLog(textures[i]->_debugName);
+			textures[i]->BindToSlot(i + 1);
 		}
 
 		int textureSlots[32];

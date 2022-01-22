@@ -28,6 +28,7 @@ namespace melisma {
 		void SetBatchSize(uint32_t);
 
 		void DrawQuad(glm::vec2 pos, glm::vec2 size, glm::vec4 color, float texture_slot);
+		void DrawTile(glm::vec2 pos, const Ref<Texture> &texture, float scale = 1.0f, int u = 0, int v = 0);
 		void Clear(glm::vec4 color = {0, 0, 0, 1}) const;
 
 		void SetViewport(Viewport);

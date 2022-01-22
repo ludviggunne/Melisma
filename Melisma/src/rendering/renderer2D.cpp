@@ -89,6 +89,63 @@ namespace melisma {
 		m_Batch.quad_count++;
 	}
 
+	void Renderer2D::DrawTile(glm::vec2 pos, const Ref<Texture> &texture, float scale, int u, int v)
+	{
+		if (m_Batch.quad_count >= m_Batch.quad_size)
+		{
+			EndScene();
+			Flush();
+		}
+
+		auto tex_slot = texture->GetSlot();
+
+		float w = scale * texture->Width();
+		float h = scale * texture->Height();
+
+		float u_unit = 1.0f / texture->HTiles();
+		float v_unit = 1.0f / texture->VTiles();
+
+		float ut = u_unit * u;
+		float vt = v_unit * v;
+
+		/* Vertices */
+		// Melisma Todo: construct vecs by member?
+		m_Batch.vertex_buffer_ptr->Position = glm::vec3(pos, 1.0f);
+		m_Batch.vertex_buffer_ptr->TexCoord = glm::vec2(ut, vt + v_unit);
+		m_Batch.vertex_buffer_ptr->TexID = tex_slot;
+		m_Batch.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		m_Batch.vertex_buffer_ptr++;
+
+		m_Batch.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(w, 0), 1.0f);
+		m_Batch.vertex_buffer_ptr->TexCoord = glm::vec2(ut + u_unit, vt + v_unit);
+		m_Batch.vertex_buffer_ptr->TexID = tex_slot;
+		m_Batch.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		m_Batch.vertex_buffer_ptr++;
+
+		m_Batch.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(0, h), 1.0f);
+		m_Batch.vertex_buffer_ptr->TexCoord = glm::vec2(ut, vt);
+		m_Batch.vertex_buffer_ptr->TexID = tex_slot;
+		m_Batch.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		m_Batch.vertex_buffer_ptr++;
+
+		m_Batch.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(w, h), 1.0f);
+		m_Batch.vertex_buffer_ptr->TexCoord = glm::vec2(ut + u_unit, vt);
+		m_Batch.vertex_buffer_ptr->TexID = tex_slot;
+		m_Batch.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		m_Batch.vertex_buffer_ptr++;
+
+		/* Indices */
+		*(m_Batch.index_buffer_ptr++) = 4 * (m_Batch.quad_count);
+		*(m_Batch.index_buffer_ptr++) = 4 * (m_Batch.quad_count) + 1;
+		*(m_Batch.index_buffer_ptr++) = 4 * (m_Batch.quad_count) + 2;
+
+		*(m_Batch.index_buffer_ptr++) = 4 * (m_Batch.quad_count) + 1;
+		*(m_Batch.index_buffer_ptr++) = 4 * (m_Batch.quad_count) + 2;
+		*(m_Batch.index_buffer_ptr++) = 4 * (m_Batch.quad_count) + 3;
+
+		m_Batch.quad_count++;
+	}
+
 	void Renderer2D::Clear(glm::vec4 color) const
 	{
 		GLcall(glClearColor(color.r, color.g, color.b, color.a));

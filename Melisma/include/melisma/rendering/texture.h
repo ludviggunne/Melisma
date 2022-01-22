@@ -38,16 +38,21 @@ namespace melisma {
 		Texture(const void *data, int width, int height, TextureSpecification spec);
 		~Texture();
 
-		void BindToSlot(unsigned int slot);
+		void BindToSlot(int slot);
+		int GetSlot() const { return m_Slot; }
 
 		int Width() const { return m_Width; }
 		int Height() const { return m_Height; }
+
+		int HTiles() const { return m_hTiles; }
+		int VTiles() const { return m_vTiles; }
 
 	public:
 		static void BindContiguous(Texture *textures, unsigned int count);
 
 	private:
 		unsigned int m_RendererID;
+		int m_Slot;
 
 		unsigned int m_Width;
 		unsigned int m_Height;
