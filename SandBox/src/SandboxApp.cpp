@@ -2,6 +2,8 @@
 
 using namespace melisma;
 
+#include <format>
+
 class SandboxApp : public Application {
 public:
 	SandboxApp() : Application(), tOffset(0), tVelocity(0), tDir(1) {}
@@ -17,33 +19,32 @@ public:
 
 		m_Window->SetResizable(false);
 
-		std::vector<Ref<Texture>> textures;
 
 		/* Textures */
-		TextureSpecification tspec;
+		std::vector<Ref<Texture>> textures;
+		TextureSpecification tex_spec;
 
-		unsigned int white = 0xffffffff;
-		textures.push_back(Ref<Texture>(&white, 1, 1, tspec));
+		unsigned int white_data = 0xffffffff;
+		Ref<Texture> white_texture(&white_data, 1, 1, tex_spec);
+		textures.push_back(white_texture);
+		white_texture->BindToSlot(0);
 
-		tspec.colorSpace = ColorSpace::RGBA;
-		tspec.magFilter = Filter::NEAREST;
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0000_9.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0001_8.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0002_7.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0003_6.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0004_Lights.png", tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0006_4.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0007_Lights.png", tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0009_2.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0010_1.png",		 tspec));
-		textures.push_back(Ref<Texture>("textures/forest/Layer_0011_0.png",		 tspec));
+		tex_spec.colorSpace = ColorSpace::RGBA;
+		tex_spec.magFilter = Filter::NEAREST;
 
-		for (int i = 0; i < textures.size(); i++) {
-			textures[i]->BindToSlot(i);
+		for (int i = 0; i < 12; i++) {
+
+			auto path = std::format("textures/forest/Layer{:02d}.png", i);
+
+			Ref<Texture> texture(path.c_str(), tex_spec);
+			texture->BindToSlot(i + 1);
+			textures.push_back(texture);
 		}
 
 		int textureSlots[32];
-		for (int i = 0; i < 32; i++) textureSlots[i] = i;
+		for (int i = 0; i < 32; i++) 
+			textureSlots[i] = i;
+
 
 		/* Shaders */
 		ShaderProgram program;
@@ -53,19 +54,21 @@ public:
 		program.SetUniformArray(program.GetUniformLocation("u_Textures"), 32, textureSlots);
 		int viewLoc = program.GetUniformLocation("u_View");
 
+
 		int width =  textures[1]->Width();
 		int height = textures[1]->Height();
 
-		glm::mat4 viewBase = glm::mat4(1.0f);//glm::ortho(0.0f, (float)width, 0.0f, (float)height, 0.01f, 100.0f);
+		glm::mat4 viewBase = glm::mat4(1.0f);//*/glm::ortho(0.0f, (float)width, 0.0f, (float)height, 0.01f, 100.0f);
 		viewBase = glm::translate(viewBase, glm::vec3(-1.0f, -1.0f, 0.0f));
 		viewBase = glm::scale(viewBase, glm::vec3(2.0f / width, 2.0f / height, 1.0f));
 
-		m_Window->SetSize(2 * width, 2 * height);
+		m_Window->SetSize(width, height);
 		//m_Window->GetFrameBufferSize(width, height);
-		renderer.SetViewport({ 0, 0, 2 * width, 2 * height });
+		renderer.SetViewport({ 0, 0, width, height });
 
-		width *= 1.5f;
-		height *= 1.5f;
+		width  *= 3;
+		height *= 3;
+
 
 		while (m_Running) { 
 			renderer.Clear(glm::vec4(glm::vec3(0.2f), 0.2f));
