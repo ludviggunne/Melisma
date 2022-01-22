@@ -105,8 +105,8 @@ workspace "Melisma"
             symbols "On"
 
             symbolspath {
-                "bin/Debug/%{prj.name}",
-                "C:/vclib/GLFW/Debug/lib"
+                "bin/Debug/%{prj.name}/%{prj.name}.exe",
+                "C:/vclib/GLFW/Debug/lib/glfw3.pdb"
             }
 
         filter "configurations:Release"
