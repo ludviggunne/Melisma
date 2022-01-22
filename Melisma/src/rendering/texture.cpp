@@ -61,6 +61,8 @@ namespace melisma {
 		GLcall(glBindTexture(GL_TEXTURE_2D, 0));
 
 		if(load_success) stbi_image_free(image_data);
+
+		mlDefineDebugName("Texture: " << filename);
 	}
 
 	Texture::Texture(const void *data, int width, int height, TextureSpecification spec)
@@ -85,6 +87,8 @@ namespace melisma {
 			width, height, 0, (GLenum)spec.colorSpace, GL_UNSIGNED_BYTE, data));
 
 		GLcall(glBindTexture(GL_TEXTURE_2D, 0));
+
+		mlDefineDebugName("Texture: no source");
 	}
 
 	Texture::~Texture()

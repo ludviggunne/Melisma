@@ -119,6 +119,7 @@ namespace melisma {
 
 	Window::~Window()
 	{
+		mlLog("Window destructed");
 		glfwTerminate();
 	}
 	void Window::OnUpdate(const DeltaTime &) const

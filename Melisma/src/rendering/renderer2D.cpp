@@ -16,7 +16,7 @@ namespace melisma {
 
 	Renderer2D::Renderer2D()
 	{ 
-		m_VAO = Ref<VertexArrayObject>(DefaultVertexBufferLayout<Vertex>());
+		m_VAO = Ref<VertexArrayObject>::Create(DefaultVertexBufferLayout<Vertex>());
 		SetBatchSize(1000);
 		SetViewport(Viewport(0, 0, 800, 600));
 

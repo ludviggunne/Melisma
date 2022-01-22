@@ -10,7 +10,7 @@
 namespace melisma {
 
 	Application::Application() : m_Running(true) {
-		m_Window = new Window;
+		m_Window = Ref<Window>::Create();
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 	}
 

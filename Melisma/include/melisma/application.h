@@ -16,7 +16,7 @@ namespace melisma {
 	class melismaAPI Application {
 	public:
 		Application();
-		virtual ~Application() {}
+		virtual ~Application() { }
 
 		Application(const Application &) = delete;
 		Application operator =(const Application &) = delete;
@@ -49,7 +49,7 @@ namespace melisma {
 
 	protected:
 		bool m_Running;
-		Window *m_Window;
+		Ref<Window> m_Window;
 		LayerStack m_LayerStack;
 	};
 

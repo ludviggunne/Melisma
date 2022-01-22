@@ -4,7 +4,7 @@
 
 #define TYPE(type) #type
 
-#if 1
+#if 0
 #define mlLogRef(msg) mlLog("Ref<T>: " << msg)
 #else
 #define mlLogRef(msg)
@@ -18,13 +18,17 @@ namespace melisma {
 		Ref() : m_Instance(nullptr), m_Refs(nullptr) {}
 
 		template<typename... ArgT>
-		Ref(ArgT... args) : Ref()
+		static Ref Create(ArgT... args)
 		{
-			m_Instance = new T(args...);
-			m_Refs     = new unsigned int;
-			*m_Refs    = 1;
+			Ref ref; 
+
+			ref.m_Instance = new T(args...);
+			ref.m_Refs = new unsigned int;
+			*(ref.m_Refs) = 1;
 
 			mlLogRef("Created");
+
+			return ref;
 		}
 
 		Ref(T *&&ptr) : Ref()
@@ -38,13 +42,18 @@ namespace melisma {
 
 		~Ref() 
 		{
-			(*m_Refs)--;
+			if (m_Refs)
+			{
+				(*m_Refs)--;
 
-			if (*m_Refs == 0) {
-				delete m_Refs;
-				delete m_Instance;
+				mlLogRef("Destructed, refs = " << *m_Refs);
 
-				mlLogRef("No references left, deleting data.");
+				if (*m_Refs == 0) {
+					delete m_Refs;
+					delete m_Instance;
+
+					mlLogRef("No references left, deleting data.");
+				}
 			}
 		}
 
@@ -122,5 +131,4 @@ namespace melisma {
 		T *m_Instance;
 		unsigned int *m_Refs;
 	};
-
 }

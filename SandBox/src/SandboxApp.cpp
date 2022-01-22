@@ -25,18 +25,19 @@ public:
 		TextureSpecification tex_spec;
 
 		unsigned int white_data = 0xffffffff;
-		Ref<Texture> white_texture(&white_data, 1, 1, tex_spec);
+		auto white_texture = Ref<Texture>::Create(&white_data, 1, 1, tex_spec);
 		textures.push_back(white_texture);
 		white_texture->BindToSlot(0);
+		mlLog(white_texture->_debugName);
 
 		tex_spec.colorSpace = ColorSpace::RGBA;
 		tex_spec.magFilter = Filter::NEAREST;
 
 		for (int i = 0; i < 12; i++) {
-
 			auto path = std::format("textures/forest/Layer{:02d}.png", i);
 
-			Ref<Texture> texture(path.c_str(), tex_spec);
+			auto texture = Ref<Texture>::Create(path.c_str(), tex_spec);
+			mlLog(texture->_debugName);
 			texture->BindToSlot(i + 1);
 			textures.push_back(texture);
 		}

@@ -54,6 +54,8 @@ namespace melisma {
 
 		unsigned int m_hTiles;
 		unsigned int m_vTiles;
+
+		mlDeclareDebugName;
 	};
 
 }
