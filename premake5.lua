@@ -98,11 +98,16 @@ workspace "Melisma"
 
         debugdir "%{prj.name}/debugdir"
 
+
         filter "configurations:Debug"
             defines "ML_DEBUG"
             buildoptions "/MDd"
             symbols "On"
 
+            symbolspath {
+                "bin/Debug/%{prj.name}",
+                "C:/vclib/GLFW/Debug/lib"
+            }
 
         filter "configurations:Release"
             defines "ML_RELEASE"
