@@ -4,14 +4,14 @@
 namespace melisma {
 
 	enum class Wrap {
-		REPEAT		    = 0x2901,
-		CLAMP_TO_EDGE   = 0x812F,
-		MIRRORED_REPEAT = 0x8370
+		Repeat		    = 0x2901,
+		ClampToEdge     = 0x812F,
+		MirroredRepeat  = 0x8370
 	};
 
 	enum class Filter {
-		NEAREST = 0x2600,
-		LINEAR  = 0x2601
+		Nearest = 0x2600,
+		Linear  = 0x2601
 	};
 
 	enum class ColorSpace {
@@ -22,11 +22,11 @@ namespace melisma {
 	struct TextureSpecification {
 		ColorSpace colorSpace	= ColorSpace::RGB;
 
-		Filter magFilter		= Filter::NEAREST;
-		Filter minFilter		= Filter::NEAREST;
+		Filter magFilter		= Filter::Nearest;
+		Filter minFilter		= Filter::Nearest;
 
-		Wrap sWrap				= Wrap::REPEAT;
-		Wrap tWrap				= Wrap::REPEAT;
+		Wrap sWrap				= Wrap::Repeat;
+		Wrap tWrap				= Wrap::Repeat;
 
 		unsigned int hTiles		= 1;
 		unsigned int vTiles		= 1;
@@ -34,6 +34,12 @@ namespace melisma {
 
 	class melismaAPI Texture {
 	public:
+		Texture()							 = delete;
+		Texture(const Texture &)			 = delete;
+		Texture operator =(const Texture &)  = delete;
+		Texture(Texture &&)					 = delete;
+		Texture operator =(Texture &&)		 = delete;
+
 		Texture(const char *filename, TextureSpecification spec);
 		Texture(const void *data, int width, int height, TextureSpecification spec);
 		~Texture();
