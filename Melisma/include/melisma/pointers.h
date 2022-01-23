@@ -39,6 +39,24 @@ namespace melisma {
 		}
 
 
+		void Clear() {
+
+			(*m_Refs)--;
+
+			mlLogRef("Destructed, refs = " << *m_Refs);
+
+			if (*m_Refs == 0) {
+				delete m_Refs;
+				delete m_Instance;
+
+				mlLogRef("No references left, deleting data.");
+			}
+
+			m_Refs = nullptr;
+			m_Instance = nullptr;
+		}
+
+
 
 		~Ref() 
 		{
