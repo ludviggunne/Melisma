@@ -13,6 +13,7 @@
 
 namespace melisma {
 
+
 	// Melisma Todo: static application instance so that layers etc. can access window etc.
 	class melismaAPI Application {
 	public:
@@ -32,13 +33,12 @@ namespace melisma {
 		virtual bool IsKeyPressed(KeyCode keyCode) final { return m_Window->IsKeyPressed(keyCode); }
 		// Melisma Todo: IsMousePressed
 
-	public:
+		int GetWindowWidth() { return m_Window->GetWidth(); }
+		int GetWindowHeight() { return m_Window->GetHeight(); }
 
 	protected:
 		bool m_Running;
 		Ref<Window> m_Window;
 		LayerStack m_LayerStack;
 	};
-
-	//Application *CreateApplication();
 }

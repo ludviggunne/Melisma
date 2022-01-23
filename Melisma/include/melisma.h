@@ -9,13 +9,11 @@ extern melisma::Application *CreateApplication();
 // ENTRY POINT --------------------------------------------------------------------------
 int main() {
 
-	melisma::Application *application = CreateApplication();
-
+	auto application = CreateApplication();
 	application->Run();
-
 	delete application;
 
-#if ML_DEBUG
+#if ML_DEBUG && 0
 	std::cout << "Application finished, press enter to exit.";
 	std::cin.get();
 #endif
