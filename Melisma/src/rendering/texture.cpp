@@ -9,7 +9,6 @@
 namespace melisma {
 
 	Texture::Texture(const char *filename, TextureSpecification spec)
-		: m_Slot(-1)
 	{
 		int prefered_channels = 0;
 		switch (spec.colorSpace) {
@@ -67,7 +66,6 @@ namespace melisma {
 	}
 
 	Texture::Texture(const void *data, int width, int height, TextureSpecification spec)
-		: m_Slot(-1)
 	{
 		m_Width = width;
 		m_Height = height;
@@ -100,7 +98,7 @@ namespace melisma {
 
 	void Texture::BindToUnit(int unit)
 	{
-		glBindTextureUnit((uint32_t)slot, m_RendererID);
+		glBindTextureUnit((uint32_t)unit, m_RendererID);
 	}
 
 }
