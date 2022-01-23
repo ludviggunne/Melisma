@@ -1,4 +1,4 @@
-#version 330 core
+#version 450 core
 
 in vec2			v_TexCoord;
 flat in float	v_TexID;

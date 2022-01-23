@@ -24,8 +24,8 @@ namespace melisma {
 
 		/* Create window */
 		mlVerifyMsg(m_NativeHandle = glfwCreateWindow(width, height, title, NULL, NULL), "Couldn't create GLFW window");
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		glfwMakeContextCurrent((GLFWwindow*)m_NativeHandle);
