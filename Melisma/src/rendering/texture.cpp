@@ -9,7 +9,6 @@
 namespace melisma {
 
 	Texture::Texture(const char *filename, TextureSpecification spec)
-		: m_Slot(-1)
 	{
 		int prefered_channels = 0;
 		switch (spec.colorSpace) {
@@ -67,7 +66,6 @@ namespace melisma {
 	}
 
 	Texture::Texture(const void *data, int width, int height, TextureSpecification spec)
-		: m_Slot(-1)
 	{
 		m_Width = width;
 		m_Height = height;
@@ -98,16 +96,9 @@ namespace melisma {
 		GLcall(glDeleteTextures(1, &m_RendererID));
 	}
 
-	void Texture::BindToSlot(int slot)
+	void Texture::BindToUnit(int unit)
 	{
-		glBindTextureUnit((uint32_t)slot, m_RendererID);
-		m_Slot = slot;
-	}
-
-	void Texture::BindContiguous(Texture *textures, unsigned int count)
-	{
-		for (unsigned int i = 0; i < count; i++)
-			textures[i].BindToSlot(i);
+		glBindTextureUnit((uint32_t)unit, m_RendererID);
 	}
 
 }
