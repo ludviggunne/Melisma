@@ -10,6 +10,7 @@
 
 
 /* Implementation of 2D batch renderer */
+// Melisma Todo: Singleton
 namespace melisma {
 
 	struct Viewport {
@@ -38,6 +39,8 @@ namespace melisma {
 		void EndScene();
 
 	public:
+		static void Init();	   // Melisma Todo: impl
+		static void ShutDown();// Melisma Todo: impl
 
 	private:
 		void ClearBatch();
