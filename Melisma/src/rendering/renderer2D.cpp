@@ -165,6 +165,11 @@ namespace melisma {
 
 	void Renderer2D::DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, float scale, int u, int v)
 	{
+		DrawTexturedQuad(pos, texture, glm::vec2(texture->Width(), texture->Height()), u, v); // Melisma Todo: Forwarding arguments (const&?)
+	}
+
+	void Renderer2D::DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, glm::vec2 size, int u, int v)
+	{
 		if (s_Data.quad_count >= s_Data.quad_size)
 		{
 			EndScene();
@@ -197,10 +202,6 @@ namespace melisma {
 			s_Data.texture_count++;
 		}
 
-
-		float w = scale * texture->Width();
-		float h = scale * texture->Height();
-
 		float u_unit = 1.0f / texture->HTiles();
 		float v_unit = 1.0f / texture->VTiles();
 
@@ -215,19 +216,19 @@ namespace melisma {
 		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
 		s_Data.vertex_buffer_ptr++;
 
-		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(w, 0), 1.0f);
+		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(size.x, 0), 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut + u_unit, vt + v_unit);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
 		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
 		s_Data.vertex_buffer_ptr++;
 
-		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(0, h), 1.0f);
+		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(0, size.y), 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut, vt);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
 		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
 		s_Data.vertex_buffer_ptr++;
 
-		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(w, h), 1.0f);
+		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(size.x, size.y), 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut + u_unit, vt);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
 		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };

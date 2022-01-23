@@ -37,6 +37,7 @@ namespace melisma {
 
 		static void DrawQuad(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
 		static void DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, float scale = 1.0f, int u = 0, int v = 0);
+		static void DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, glm::vec2 size, int u = 0, int v = 0);
 
 		static void Clear(glm::vec4 color = {0, 0, 0, 1});
 
