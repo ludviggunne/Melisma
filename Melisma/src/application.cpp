@@ -3,6 +3,7 @@
 
 #include <functional>
 
+// Melisma Todo: Remove this macro
 #define mlDispatchEventApplication(event_type_name)\
 	case event_type_name:\
 		if (On##event_type_name(static_cast<event_type_name##Event &>(e))) return;\
@@ -23,9 +24,9 @@ namespace melisma {
 		{
 			Renderer2D::ShutDown();
 			m_Running = false;
-		}
 
-		return;
+			return;
+		}
 
 		m_LayerStack.OnEvent(e);
 	}
