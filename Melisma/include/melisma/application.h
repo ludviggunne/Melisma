@@ -13,7 +13,7 @@
 
 namespace melisma {
 
-	// Melisma Todo: Singleton?
+	// Melisma Todo: static application instance so that layers etc. can access window etc.
 	class melismaAPI Application {
 	public:
 		Application();
