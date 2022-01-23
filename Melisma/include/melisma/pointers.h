@@ -4,7 +4,7 @@
 
 #define TYPE(type) #type
 
-#if 1
+#if 0
 #define mlLogRef(msg) mlLog("Ref<T>: " << msg)
 #else
 #define mlLogRef(msg)
