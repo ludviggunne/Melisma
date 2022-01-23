@@ -5,6 +5,8 @@
 
 #define melismaAPI
 
+#define ML_MAX_TEXTURES 32
+
 // Melisma Todo: implement debug features / logging (spdlog?)
 
 #ifdef ML_DEBUG
