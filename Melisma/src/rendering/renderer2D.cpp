@@ -28,7 +28,7 @@ namespace melisma {
 		// Create default white texture
 		unsigned int white_color = 0xffffffff;
 		m_white_texture = Ref<Texture>::Create(&white_color, 1, 1, TextureSpecification{});
-		m_white_texture->BindToSlot(0);
+		m_white_texture->BindToUnit(0);
 
 		m_texture_count = 0;
 	}
@@ -113,7 +113,7 @@ namespace melisma {
 			if (m_textures[i] == texture)
 			{
 				// Add one since m_textures[0] is in unit 1 (white texture in unit 0)
-				texture_index = i + 1;
+				texture_index = (float)(i + 1);
 				break;
 			}
 		}
@@ -126,8 +126,8 @@ namespace melisma {
 			}
 
 			m_textures[m_texture_count] = texture;
-			texture->BindToSlot(m_texture_count);
-			texture_index = (float)m_texture_count;
+			texture->BindToUnit(m_texture_count + 1);
+			texture_index = (float)(m_texture_count + 1);
 
 			m_texture_count++;
 		}
