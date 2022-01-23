@@ -145,6 +145,16 @@ namespace melisma {
 		glfwGetFramebufferSize((GLFWwindow *)m_NativeHandle, &width, &height);
 	}
 
+	int Window::GetWidth() const
+	{
+		return m_UserData.Width;
+	}
+
+	int Window::GetHeight() const
+	{
+		return m_UserData.Height;
+	}
+
 	bool Window::IsKeyPressed(KeyCode keyCode) const
 	{
 		return glfwGetKey((GLFWwindow *)m_NativeHandle, (int)keyCode);

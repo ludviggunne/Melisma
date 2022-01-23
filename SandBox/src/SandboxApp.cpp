@@ -2,14 +2,15 @@
 
 using namespace melisma;
 
-#include <format>
-
 class RenderLayer : public Layer {
 public:
 	virtual void OnAttach() override {
 		TextureSpecification spec;
 		spec.colorSpace = ColorSpace::RGB;
-		m_Texture = Ref<Texture>::Create("textures/erling.jpg", spec);
+		m_Texture = CreateRef<Texture>("textures/erling.jpg", spec);
+
+		Renderer2D::SetViewport(Viewport(0, 0, 800, 600));
+		m_Camera = Camera(glm::ortho(0.0f, (float)800, 0.0f, (float)600, -1.0f, 100.0f));
 	}
 
 	virtual void OnUpdate(const DeltaTime&) override {
@@ -30,6 +31,7 @@ private:
 	Ref<Texture> m_Texture;
 	Camera m_Camera;
 };
+
 
 class SandboxApp : public Application {
 public:

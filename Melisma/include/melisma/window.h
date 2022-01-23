@@ -26,6 +26,8 @@ namespace melisma {
 		void SetSize(int width, int height);
 
 		void GetFrameBufferSize(int &width, int &height) const;
+		int GetWidth() const;
+		int GetHeight() const;
 
 		bool IsKeyPressed(KeyCode keyCode) const;
 

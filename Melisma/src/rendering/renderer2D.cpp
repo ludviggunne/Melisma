@@ -13,7 +13,7 @@
 namespace melisma {
 
 	struct RenderData {
-		Ref<VertexArrayObject> vertex_array; // Melisma Todo: Change to melisma::Scope
+		Scope<VertexArrayObject> vertex_array; // Melisma Todo: Change to melisma::Scope
 		Viewport viewport;
 
 		// Textures
@@ -23,7 +23,7 @@ namespace melisma {
 
 
 		// Shader
-		Ref<ShaderProgram> program; // Melisma Todo: Change to melisma::Scope
+		Scope<ShaderProgram> program; // Melisma Todo: Change to melisma::Scope
 		int view_location = -1;
 
 
@@ -56,11 +56,11 @@ namespace melisma {
 
 
 		// Vertex array
-		s_Data.vertex_array = new VertexArrayObject(DefaultVertexBufferLayout<Vertex>());
+		s_Data.vertex_array = CreateScope<VertexArrayObject>(DefaultVertexBufferLayout<Vertex>());
 
 
 		// Shaders
-		s_Data.program = Ref<ShaderProgram>::Create();
+		s_Data.program = CreateScope<ShaderProgram>();
 		s_Data.program->Create("shaders/shader.vert.glsl", "shaders/shader.frag.glsl");
 		s_Data.view_location = s_Data.program->GetUniformLocation("u_View");
 
@@ -77,7 +77,7 @@ namespace melisma {
 
 		// Create default white texture
 		unsigned int white_color = 0xffffffff;
-		s_Data.white_texture = Ref<Texture>::Create(&white_color, 1, 1, TextureSpecification{});
+		s_Data.white_texture = CreateRef<Texture>(&white_color, 1, 1, TextureSpecification{});
 		s_Data.white_texture->BindToUnit(0);
 
 		s_Data.texture_count = 0;
@@ -85,15 +85,15 @@ namespace melisma {
 
 	void Renderer2D::ShutDown()
 	{
-		// Clear resources
-		s_Data.vertex_array.Clear();
-		s_Data.program.Clear();
+		// Clear resources (must be reset since static variables scopes exceed lifetime of context (melisma::Window)
+		s_Data.vertex_array.reset();
+		s_Data.program.reset();
 
 		for (int i = 0; i < s_Data.texture_count; i++) {
-			s_Data.texture_buffer[i].Clear();
+			s_Data.texture_buffer[i].reset();
 		}
 
-		s_Data.white_texture.Clear();
+		s_Data.white_texture.reset();
 	}
 
 	void Renderer2D::SetBatchSize(uint32_t size)
@@ -105,7 +105,7 @@ namespace melisma {
 
 
 		s_Data.vertex_buffer		= new Vertex  [(size_t)size * 4];
-		s_Data.index_buffer		= new uint32_t[(size_t)size * 6];
+		s_Data.index_buffer			= new uint32_t[(size_t)size * 6];
 
 		s_Data.vertex_buffer_ptr	= s_Data.vertex_buffer;
 		s_Data.index_buffer_ptr 	= s_Data.index_buffer;
