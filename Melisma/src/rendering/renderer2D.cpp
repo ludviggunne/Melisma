@@ -10,8 +10,6 @@
 #include "glcall.h"
 #include "..\..\include\melisma\rendering\renderer2D.h"
 
-// Melisma Todo: Remake renderer to contain shaders, textures and uniforms
-
 namespace melisma {
 
 	struct RenderData {
@@ -25,7 +23,7 @@ namespace melisma {
 
 
 		// Shader
-		Ref<ShaderProgram> program;
+		Ref<ShaderProgram> program; // Melisma Todo: Change to melisma::Scope
 		int view_location = -1;
 
 

@@ -149,4 +149,6 @@ namespace melisma {
 		T *m_Instance;
 		unsigned int *m_Refs;
 	};
+
+	// Melisma Todo: Implement Scope<T>
 }
