@@ -1,4 +1,5 @@
 #include "melisma/application.h"
+#include "melisma/rendering/renderer2D.h"
 
 #include <functional>
 
@@ -12,35 +13,21 @@ namespace melisma {
 	Application::Application() : m_Running(true) {
 		m_Window = Ref<Window>::Create();
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+
+		Renderer2D::Init();
 	}
 
 	void Application::OnEvent(Event &e)
 	{
-		using enum EventType;
-		switch (e.GetType()) {
-			mlDispatchEventApplication(WindowClose);
-			mlDispatchEventApplication(WindowResize);
-			mlDispatchEventApplication(WindowFocus);
-			mlDispatchEventApplication(WindowLostFocus);
-			mlDispatchEventApplication(WindowMoved);
-
-			mlDispatchEventApplication(KeyPressed);
-			mlDispatchEventApplication(KeyReleased);
-			mlDispatchEventApplication(KeyTyped);
-
-			mlDispatchEventApplication(MouseButtonPressed);
-			mlDispatchEventApplication(MouseButtonReleased);
-			mlDispatchEventApplication(MouseMoved);
-			mlDispatchEventApplication(MouseScrolled);
+		if (e.GetType() == EventType::WindowClose)
+		{
+			Renderer2D::ShutDown();
+			m_Running = false;
 		}
 
-		m_LayerStack.OnEvent(e);
-	}
+		return;
 
-	bool Application::OnWindowClose(WindowCloseEvent &)
-	{
-		m_Running = false;
-		return true;
+		m_LayerStack.OnEvent(e);
 	}
 
 	void Application::PushLayerTop(Ref<Layer> layer)
