@@ -19,7 +19,7 @@ namespace melisma {
 		Ref<Layer> PopLayer(Ref<Layer>);
 
 		bool OnEvent(Event &);
-		void OnUpdate(const DeltaTime &deltaTime);
+		void OnUpdate(const DeltaTime &deltaTime = DeltaTime{});
 
 	private:
 		std::vector<Ref<Layer>> m_Layers;

@@ -20,7 +20,7 @@ namespace melisma {
 
 		void SetEventCallback(const EventCallbackFn &callback) { m_UserData.EventCallback = callback; }
 
-		void OnUpdate(const DeltaTime &) const;
+		void OnUpdate(const DeltaTime &deltaTime = DeltaTime{}) const;
 
 		void SetResizable(bool resizable) const;
 		void SetSize(int width, int height);
