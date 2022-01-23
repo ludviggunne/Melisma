@@ -22,28 +22,20 @@ public:
 
 		/* Textures */
 		std::vector<Ref<Texture>> textures;
-		textures.reserve(13);
+		textures.reserve(12);
+
 		TextureSpecification tex_spec;
-
-		unsigned int white_data = 0xffffffff;
-		auto white_texture = Ref<Texture>::Create(&white_data, 1, 1, tex_spec);
-		textures.push_back(white_texture);
-		white_texture->BindToSlot(0);
-		mlLog(white_texture->_debugName);
-
 		tex_spec.colorSpace = ColorSpace::RGBA;
 		tex_spec.magFilter  = Filter::Nearest;
 
-		for (int i = 1; i < 13; i++) {
-			auto path = std::format("textures/forest/Layer{:02d}.png", i - 1);
+		for (int i = 0; i < 12; i++) {
+			auto path = std::format("textures/forest/Layer{:02d}.png", i);
 
-			
 			textures.push_back(Ref<Texture>::Create(path.c_str(), tex_spec));
 			mlLog(textures[i]->_debugName);
-			textures[i]->BindToSlot(i);
 		}
 
-		int textureSlots[32];
+		int textureSlots[32]; // Melisma Todo: move to renderer
 		for (int i = 0; i < 32; i++) 
 			textureSlots[i] = i;
 
@@ -57,10 +49,10 @@ public:
 		int viewLoc = program.GetUniformLocation("u_View");
 
 
-		int width =  textures[1]->Width();
-		int height = textures[1]->Height();
+		int width =  textures[0]->Width();
+		int height = textures[0]->Height();
 
-		glm::mat4 viewBase = glm::mat4(1.0f);//*/glm::ortho(0.0f, (float)width, 0.0f, (float)height, 0.01f, 100.0f);
+		glm::mat4 viewBase = glm::mat4(1.0f);//*/glm::ortho(0.0f, (float)width, 0.0f, (float)height, 0.01f, 100.0f); // Melisma Todo: Figure out 
 		viewBase = glm::translate(viewBase, glm::vec3(-1.0f, -1.0f, 0.0f));
 		viewBase = glm::scale(viewBase, glm::vec3(2.0f / width, 2.0f / height, 1.0f));
 
@@ -75,25 +67,13 @@ public:
 
 			renderer.BeginScene();
 
-			for (int i = (int)textures.size() - 1; i > 0; i--) {
+			for (int i = (int)textures.size() - 1; i >= 0; i--) {
 				int offset = (int)((textures.size() - i) * tOffset / textures.size());
 				offset %= width;
 
-				renderer.DrawQuad(
-					{ -width + offset, 0 },
-					{ width, height },
-					{ 1.0f, 1.0f, 1.0f, 1.0f },
-					(float)i);
-				renderer.DrawQuad(
-					{ offset, 0 },
-					{ width, height },
-					{ 1.0f, 1.0f, 1.0f, 1.0f },
-					(float)i);
-				renderer.DrawQuad(
-					{ width + offset, 0 },
-					{ width, height },
-					{ 1.0f, 1.0f, 1.0f, 1.0f },
-					(float)i);
+				renderer.DrawTexturedQuad({ -width + offset, 0 }, textures[i]);
+				renderer.DrawTexturedQuad({ offset, 0 }, textures[i]);
+				renderer.DrawTexturedQuad({ width + offset, 0 }, textures[i]);
 			}
 
 			renderer.EndScene();
