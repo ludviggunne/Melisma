@@ -32,15 +32,15 @@ public:
 		mlLog(white_texture->_debugName);
 
 		tex_spec.colorSpace = ColorSpace::RGBA;
-		tex_spec.magFilter  = Filter::NEAREST;
+		tex_spec.magFilter  = Filter::Nearest;
 
-		for (int i = 0; i < 12; i++) {
-			auto path = std::format("textures/forest/Layer{:02d}.png", i);
+		for (int i = 1; i < 13; i++) {
+			auto path = std::format("textures/forest/Layer{:02d}.png", i - 1);
 
 			
 			textures.push_back(Ref<Texture>::Create(path.c_str(), tex_spec));
 			mlLog(textures[i]->_debugName);
-			textures[i]->BindToSlot(i + 1);
+			textures[i]->BindToSlot(i);
 		}
 
 		int textureSlots[32];
@@ -68,11 +68,7 @@ public:
 		//m_Window->GetFrameBufferSize(width, height);
 		renderer.SetViewport({ 0, 0, width, height });
 
-		width  *= 3;
-		height *= 3;
-
-
-		while (m_Running) { 
+		while (m_Running) {
 			renderer.Clear(glm::vec4(glm::vec3(0.2f), 0.2f));
 
 			program.SetUniform(viewLoc, viewBase);
@@ -84,9 +80,9 @@ public:
 				offset %= width;
 
 				renderer.DrawQuad(
-					{-width + offset, 0},
+					{ -width + offset, 0 },
 					{ width, height },
-					{1.0f, 1.0f, 1.0f, 1.0f},
+					{ 1.0f, 1.0f, 1.0f, 1.0f },
 					(float)i);
 				renderer.DrawQuad(
 					{ offset, 0 },
@@ -118,7 +114,7 @@ public:
 			tVelocity = tVelocity <= 0 ? 0 : tVelocity;
 
 			m_LayerStack.OnUpdate(DeltaTime()); 
-			m_Window->OnUpdate(DeltaTime()); 
+			m_Window->OnUpdate(DeltaTime());
 		}
 	}
 
