@@ -98,16 +98,9 @@ namespace melisma {
 		GLcall(glDeleteTextures(1, &m_RendererID));
 	}
 
-	void Texture::BindToSlot(int slot)
+	void Texture::BindToUnit(int unit)
 	{
 		glBindTextureUnit((uint32_t)slot, m_RendererID);
-		m_Slot = slot;
-	}
-
-	void Texture::BindContiguous(Texture *textures, unsigned int count)
-	{
-		for (unsigned int i = 0; i < count; i++)
-			textures[i].BindToSlot(i);
 	}
 
 }
