@@ -104,11 +104,6 @@ workspace "Melisma"
             buildoptions "/MDd"
             symbols "On"
 
-            symbolspath {
-                "bin/Debug/%{prj.name}/%{prj.name}.exe",
-                "C:/vclib/GLFW/Debug/lib/glfw3.pdb"
-            }
-
         filter "configurations:Release"
             defines "ML_RELEASE"
             buildoptions "/MD"
