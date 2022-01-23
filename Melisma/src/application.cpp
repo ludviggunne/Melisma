@@ -18,6 +18,14 @@ namespace melisma {
 		Renderer2D::Init();
 	}
 
+	void Application::Run()
+	{
+		while (m_Running) {
+			m_LayerStack.OnUpdate();
+			m_Window->OnUpdate();
+		}
+	}
+
 	void Application::OnEvent(Event &e)
 	{
 		if (e.GetType() == EventType::WindowClose)
