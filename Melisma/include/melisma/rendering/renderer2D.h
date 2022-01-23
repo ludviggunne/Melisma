@@ -22,54 +22,27 @@ namespace melisma {
 
 	class melismaAPI Renderer2D {
 	public:
+		static void Init();	   
+		static void ShutDown();
 
-		/* Setup */
-		Renderer2D();
+		Renderer2D() = delete;
+		Renderer2D(const Renderer2D &) = delete;
+		Renderer2D operator = (const Renderer2D &) = delete;
 
-		void SetBatchSize(uint32_t);
+		static void SetBatchSize(uint32_t);
 
-		void DrawQuad(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
-		void DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, float scale = 1.0f, int u = 0, int v = 0);
+		static void DrawQuad(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
+		static void DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, float scale = 1.0f, int u = 0, int v = 0);
 
-		void Clear(glm::vec4 color = {0, 0, 0, 1}) const;
+		static void Clear(glm::vec4 color = {0, 0, 0, 1});
 
-		void SetViewport(Viewport);
+		static void SetViewport(Viewport);
 
-		void BeginScene(const Camera &camera = Camera());
-		void EndScene();
-
-	public:
-		static void Init();	   // Melisma Todo: impl
-		static void ShutDown();// Melisma Todo: impl
-
-	private:
-		void ClearBatch();
+		static void BeginScene(const Camera &camera = Camera());
+		static void EndScene();
 
 
 	private:
-		Ref<VertexArrayObject> m_VAO;
-		Viewport m_Viewport;
-
-		// First texture is white texture
-		Ref<Texture> m_textures[ML_MAX_TEXTURES - 1];
-		Ref<Texture> m_white_texture;
-		unsigned int m_texture_count;
-
-
-		struct Batch {
-			Vertex *vertex_buffer		= nullptr;
-			uint32_t *index_buffer		= nullptr;
-
-			Vertex *vertex_buffer_ptr	= nullptr;
-			uint32_t *index_buffer_ptr	= nullptr;
-
-			uint32_t quad_count			= 0;
-			uint32_t quad_size			= 0;
-
-		} m_Batch;
-
-		struct Info {
-			unsigned int draw_calls = 0;
-		} m_Info;
+		static void ClearBatch();
 	};
 }
