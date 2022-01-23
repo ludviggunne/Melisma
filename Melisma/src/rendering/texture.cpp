@@ -50,10 +50,10 @@ namespace melisma {
 
 		GLcall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,		(GLenum)spec.sWrap));
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,		(GLenum)spec.tWrap));
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,	(GLenum)spec.magFilter));
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,	(GLenum)spec.magFilter));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,	 (GLenum)spec.sWrap));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,	 (GLenum)spec.tWrap));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (GLenum)spec.magFilter));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLenum)spec.minFilter));
 
 
 		GLcall(glTexImage2D(GL_TEXTURE_2D, 0, (GLenum)spec.colorSpace,
@@ -79,10 +79,10 @@ namespace melisma {
 
 		GLcall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
 
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (GLenum)spec.sWrap));
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (GLenum)spec.tWrap));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,     (GLenum)spec.sWrap));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     (GLenum)spec.tWrap));
 		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (GLenum)spec.magFilter));
-		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLenum)spec.magFilter));
+		GLcall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLenum)spec.minFilter));
 
 
 		GLcall(glTexImage2D(GL_TEXTURE_2D, 0, (GLenum)spec.colorSpace,
@@ -100,8 +100,7 @@ namespace melisma {
 
 	void Texture::BindToSlot(int slot)
 	{
-		GLcall(glActiveTexture(GL_TEXTURE0 + (slot < 0 ? 0 : slot)));
-		GLcall(glBindTexture(GL_TEXTURE_2D, m_RendererID));
+		glBindTextureUnit((uint32_t)slot, m_RendererID);
 		m_Slot = slot;
 	}
 
