@@ -27,8 +27,9 @@ namespace melisma {
 
 		void SetBatchSize(uint32_t);
 
-		void DrawQuad(glm::vec2 pos, glm::vec2 size, glm::vec4 color, float texture_slot);
-		void DrawTile(glm::vec2 pos, const Ref<Texture> &texture, float scale = 1.0f, int u = 0, int v = 0);
+		void DrawQuad(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
+		void DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, float scale = 1.0f, int u = 0, int v = 0);
+
 		void Clear(glm::vec4 color = {0, 0, 0, 1}) const;
 
 		void SetViewport(Viewport);
@@ -36,17 +37,20 @@ namespace melisma {
 		void BeginScene(const Camera &camera = Camera());
 		void EndScene();
 
-		unsigned int GetDrawCalls() const { return m_Info.draw_calls; }
-
 	public:
 
 	private:
-		void Flush();
+		void ClearBatch();
 
 
 	private:
 		Ref<VertexArrayObject> m_VAO;
 		Viewport m_Viewport;
+
+		// First texture is white texture
+		Ref<Texture> m_textures[ML_MAX_TEXTURES - 1];
+		Ref<Texture> m_white_texture;
+		unsigned int m_texture_count;
 
 
 		struct Batch {
