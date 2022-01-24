@@ -159,4 +159,9 @@ namespace melisma {
 	{
 		return glfwGetKey((GLFWwindow *)m_NativeHandle, (int)keyCode);
 	}
+
+	bool Window::IsMouseButtonPressed(MouseCode mouseCode) const
+	{
+		return glfwGetMouseButton((GLFWwindow *)m_NativeHandle, (int)mouseCode);
+	}
 }

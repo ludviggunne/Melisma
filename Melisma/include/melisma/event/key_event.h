@@ -1,6 +1,6 @@
 #pragma once
 #include "event.h"
-#include "../keycodes.h"
+#include "../input/keycodes.h"
 
 namespace melisma {
 

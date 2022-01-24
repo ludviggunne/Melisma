@@ -1,7 +1,7 @@
 #pragma once
 #include "event.h"
 
-#include "melisma/mousecodes.h"
+#include "melisma/input/mousecodes.h"
 
 namespace melisma{
 

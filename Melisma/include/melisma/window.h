@@ -6,7 +6,7 @@
 
 #include "event/event.h"
 #include "delta_time.h"
-#include "keycodes.h"
+#include "input/keycodes.h"
 
 namespace melisma {
 
@@ -30,6 +30,7 @@ namespace melisma {
 		int GetHeight() const;
 
 		bool IsKeyPressed(KeyCode keyCode) const;
+		bool IsMouseButtonPressed(MouseCode mouseCode) const;
 
 	private:
 		void *m_NativeHandle;
