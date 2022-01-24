@@ -18,7 +18,7 @@ public:
 	virtual void OnUpdate(const DeltaTime&) override {
 
 		static float speed = 1.0f;
-		m_Pos.x += speed * ((float)Application::Instance->IsKeyPressed(KeyCode::Right) - (float)Application::Instance->IsKeyPressed(KeyCode::Left));
+		m_Pos.x += speed * ((float)IsKeyPressed(KeyCode::Right) - (float)IsKeyPressed(KeyCode::Left));
 
 		auto m = glm::translate(glm::mat4(1.0f), glm::vec3(m_Pos, 0.0f)) * m_Camera.GetProjection();
 		static Camera cam(m);

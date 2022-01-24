@@ -7,6 +7,7 @@
 #include "event/event.h"
 #include "delta_time.h"
 #include "input/keycodes.h"
+#include "input/mousecodes.h"
 
 namespace melisma {
 

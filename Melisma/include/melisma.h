@@ -3,6 +3,7 @@
 #include "melisma/application.h"
 #include "melisma/rendering/renderer2D.h"
 #include "melisma/pointers.h"
+#include "melisma/input/input.h"
 
 extern melisma::Application *CreateApplication();
 
