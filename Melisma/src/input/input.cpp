@@ -17,4 +17,9 @@ namespace melisma {
 		return Application::Instance->GetWindow()->IsMouseButtonPressed(mouseCode);
 	}
 
+	glm::vec2 GetMousePos()
+	{
+		return Application::Instance->GetWindow()->GetMousePos();
+	}
+
 }

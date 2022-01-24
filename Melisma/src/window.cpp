@@ -169,4 +169,12 @@ namespace melisma {
 	{
 		return glfwGetMouseButton((GLFWwindow *)m_NativeHandle, (int)mouseCode);
 	}
+
+	glm::vec2 Window::GetMousePos() const
+	{
+		double x, y;
+		glfwGetCursorPos((GLFWwindow *)m_NativeHandle, &x, &y);
+
+		return glm::vec2(x, y);
+	}
 }

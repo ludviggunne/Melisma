@@ -8,6 +8,7 @@
 #include "delta_time.h"
 #include "input/keycodes.h"
 #include "input/mousecodes.h"
+#include "glm/glm.hpp"
 
 namespace melisma {
 
@@ -33,6 +34,7 @@ namespace melisma {
 
 		bool IsKeyPressed(KeyCode keyCode) const;
 		bool IsMouseButtonPressed(MouseCode mouseCode) const;
+		glm::vec2 GetMousePos() const;
 
 	private:
 		void *m_NativeHandle;
