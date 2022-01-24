@@ -163,7 +163,7 @@ namespace melisma {
 
 	void Renderer2D::DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, float scale, int u, int v)
 	{
-		DrawTexturedQuad(pos, texture, glm::vec2(texture->Width(), texture->Height()), u, v); // Melisma Todo: Forwarding arguments (const&?)
+		DrawTexturedQuad(pos, texture, scale * glm::vec2(texture->Width(), texture->Height()), u, v); // Melisma Todo: Forwarding arguments (const&?)
 	}
 
 	void Renderer2D::DrawTexturedQuad(glm::vec2 pos, const Ref<Texture> &texture, glm::vec2 size, int u, int v)
