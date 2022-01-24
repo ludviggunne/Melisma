@@ -6,90 +6,89 @@ using namespace melisma;
 #define SCR_HEIGHT 800
 
 #include <vector>
+#include <format>
+#include <algorithm>
 
-class RenderLayer : public Layer {
+
+class ParalaxLayer : public Layer {
 public:
 	virtual void OnAttach() override {
 
 		// Load textures
-		
 		TextureSpecification spec;
-		spec.colorSpace = ColorSpace::RGB;
-
-		m_Textures.push_back(CreateRef<Texture>("textures/erling.jpg",  spec));
-		m_Textures.push_back(CreateRef<Texture>("textures/matisse.jpg", spec));
 		spec.colorSpace = ColorSpace::RGBA;
-		m_Textures.push_back(CreateRef<Texture>("textures/Tree.png", spec));
-		m_Textures.push_back(CreateRef<Texture>("textures/map.png", spec));
 
-		m_ActiveTexture = m_Textures.begin();
+		for (int i = 11; i >= 0; i--) {
+			auto path = std::format("textures/forest/Layer{:02d}.png", i);
 
-		// Init viewport
-		Renderer2D::SetViewport(Viewport(0, 0, SCR_WIDTH, SCR_HEIGHT));
-		m_Camera = Camera(glm::ortho(0.0f, (float)SCR_WIDTH, 0.0f, (float)SCR_HEIGHT, -1.0f, 100.0f));
+			m_Textures.push_back(CreateRef<Texture>(path.c_str(), spec));
+		}
 
-		m_Scale = 1.0f;
+		m_Hpos = 0;
+		m_Hspeed = 0;
+		m_Dir = 1;
+
+		{
+			WindowResizeEvent winresev(SCR_WIDTH, SCR_HEIGHT);
+			OnWindowResize(winresev);
+		}
 	}
 
 
 	virtual void OnUpdate(const DeltaTime&) override {
 
-		// COnfigure docking
-		auto right_x = Application::Instance->GetWindow()->GetWidth()  - m_Scale * (*m_ActiveTexture)->Width();
-		auto top_y   = Application::Instance->GetWindow()->GetHeight() - m_Scale * (*m_ActiveTexture)->Height();
+		const float speed = 5.0f;
+		if (IsKeyPressed(KeyCode::Right)) { 
+			m_Hspeed = speed; m_Dir = -1; 
+		}
+		if (IsKeyPressed(KeyCode::Left)) {
+			m_Hspeed = speed; m_Dir = 1;
+		}
+		
+		m_Hpos += m_Hspeed * m_Dir;
+		const float damping = .1f;
+		m_Hspeed -= damping;
+		m_Hspeed = m_Hspeed < 0 ? 0 : m_Hspeed;
 
-		// Renderer textures
-		Renderer2D::Clear(glm::vec4(0.3f, 0.2f, 0.2f, 1.0f));
+		float w = Application::Instance->GetWindow()->GetWidth();
+		float h = Application::Instance->GetWindow()->GetHeight();
+		float size = std::max(h / m_Textures[0]->Height(), w / m_Textures[0]->Width());
+
+		Renderer2D::Clear({ 1.0f, 1.0f, 1.0f, 1.0f });
 		Renderer2D::BeginScene(m_Camera);
-		Renderer2D::DrawTexturedQuad({ 0,		0		}, *m_ActiveTexture, m_Scale);
-		Renderer2D::DrawTexturedQuad({ right_x, 0		}, *m_ActiveTexture, m_Scale);
-		Renderer2D::DrawTexturedQuad({ 0,		top_y	}, *m_ActiveTexture, m_Scale);
-		Renderer2D::DrawTexturedQuad({ right_x, top_y	}, *m_ActiveTexture, m_Scale);
+		
+		for (int i = 0; i < m_Textures.size(); i++) {
+			float offset = size * m_Hpos / (12 - i);
+			Renderer2D::DrawTexturedQuad(glm::vec2(offset - size * m_Textures[0]->Width(), 0), m_Textures[i], size);
+			Renderer2D::DrawTexturedQuad(glm::vec2(offset, 0), m_Textures[i], size);
+			Renderer2D::DrawTexturedQuad(glm::vec2(offset + size * m_Textures[0]->Width(), 0), m_Textures[i], size);
+		}
 		Renderer2D::EndScene();
-
-		// Poll input
-		if (IsKeyPressed(KeyCode::Up)) m_Scale *= 1.02f;
-		if (IsKeyPressed(KeyCode::Down))  m_Scale /= 1.02f;
 	}
-
 
 	virtual bool OnWindowResize(WindowResizeEvent &e) override {
-
-		// Update viewport
 		Renderer2D::SetViewport(Viewport(0, 0, e.Width, e.Height));
-		m_Camera = Camera(glm::ortho(0.0f, (float)e.Width, 0.0f, (float)e.Height, -1.0f, 100.0f));
+		m_Camera = Camera(glm::ortho(0.0f, (float)e.Width, 0.0f, (float)e.Height, -1.0f, 10.0f));
 
-		return false;
+		return true;
 	}
 
-
 	virtual bool OnKeyPressed(KeyPressedEvent &e) override {
-		mlLog("Key pressed: " << (int)e.GetKeyCode());
-
-		// Exit
 		if (e.GetKeyCode() == KeyCode::Escape) {
-			WindowCloseEvent we;
-			Application::Instance->OnEvent((Event&)we);
+			WindowCloseEvent wce;
+			Application::Instance->OnEvent(wce);
 		}
 
-		// Cycle through textures
-		if (e.GetKeyCode() == KeyCode::Space) {
-			m_ActiveTexture++;
-
-			if (m_ActiveTexture == m_Textures.end())
-				m_ActiveTexture = m_Textures.begin();
-		}
-
-		return false;
+		return true;
 	}
 
 
 private:
 	std::vector<Ref<Texture>> m_Textures;
-	std::vector<Ref<Texture>>::const_iterator m_ActiveTexture;
-
 	Camera m_Camera;
-	float m_Scale;
+	float m_Hpos;
+	float m_Hspeed;
+	int m_Dir;
 };
 
 
@@ -98,9 +97,7 @@ private:
 class SandboxApp : public Application {
 public:
 	SandboxApp() : Application() {
-		PushLayerTop(Ref<Layer>(new RenderLayer));
-
-		m_Window->Maximize();
+		PushLayerTop(Ref<Layer>(new ParalaxLayer));
 	}
 };
 
