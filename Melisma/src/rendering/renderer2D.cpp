@@ -78,9 +78,6 @@ namespace melisma {
 		// Create default white texture
 		unsigned int white_color = 0xffffffff;
 		s_Data.white_texture = CreateRef<Texture>(&white_color, 1, 1, TextureSpecification{});
-		s_Data.white_texture->BindToUnit(0);
-
-		s_Data.texture_count = 0;
 	}
 
 	void Renderer2D::ShutDown()
@@ -89,7 +86,7 @@ namespace melisma {
 		s_Data.vertex_array.reset();
 		s_Data.program.reset();
 
-		for (int i = 0; i < s_Data.texture_count; i++) {
+		for (int i = 0; i < ML_MAX_TEXTURES - 1; i++) {
 			s_Data.texture_buffer[i].reset();
 		}
 
@@ -191,6 +188,7 @@ namespace melisma {
 			if (s_Data.texture_count == ML_MAX_TEXTURES - 2) {
 				EndScene();
 				ClearBatch();
+				s_Data.texture_count = 0;
 			}
 
 			s_Data.texture_buffer[s_Data.texture_count] = texture;
@@ -268,6 +266,7 @@ namespace melisma {
 	{
 		s_Data.draw_calls = 0;
 		s_Data.program->SetUniform(s_Data.view_location, camera.GetProjection());
+		s_Data.white_texture->BindToUnit(0);
 		ClearBatch();
 	}
 
@@ -296,7 +295,6 @@ namespace melisma {
 		s_Data.vertex_buffer_ptr	= s_Data.vertex_buffer;
 		s_Data.index_buffer_ptr		= s_Data.index_buffer;
 
-		s_Data.texture_count		= 0;
 		s_Data.quad_count			= 0;
 	}
 }
