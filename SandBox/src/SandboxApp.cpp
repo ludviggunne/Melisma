@@ -11,11 +11,20 @@ public:
 
 		Renderer2D::SetViewport(Viewport(0, 0, 800, 600));
 		m_Camera = Camera(glm::ortho(0.0f, (float)800, 0.0f, (float)600, -1.0f, 100.0f));
+
+		m_Pos = glm::vec2(0.0f);
 	}
 
 	virtual void OnUpdate(const DeltaTime&) override {
+
+		static float speed = 1.0f;
+		m_Pos.x += speed * ((float)Application::Instance->IsKeyPressed(KeyCode::Right) - (float)Application::Instance->IsKeyPressed(KeyCode::Left));
+
+		auto m = glm::translate(glm::mat4(1.0f), glm::vec3(m_Pos, 0.0f)) * m_Camera.GetProjection();
+		static Camera cam(m);
+
 		Renderer2D::Clear();
-		Renderer2D::BeginScene(m_Camera);
+		Renderer2D::BeginScene(cam);
 		Renderer2D::DrawTexturedQuad({ 0, 0 }, m_Texture);
 		Renderer2D::EndScene();
 	}
@@ -27,9 +36,20 @@ public:
 		return false;
 	}
 
+	virtual bool OnKeyPressed(KeyPressedEvent &e) override {
+		mlLog("Key pressed: " << (int)e.GetKeyCode());
+
+		if (e.GetKeyCode() == KeyCode::Escape) {
+			WindowCloseEvent we;
+			Application::Instance->OnEvent((Event&)we);
+		}
+		return false;
+	}
+
 private:
 	Ref<Texture> m_Texture;
 	Camera m_Camera;
+	glm::vec2 m_Pos;
 };
 
 

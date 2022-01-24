@@ -53,4 +53,6 @@ namespace melisma {
 	{
 		return m_LayerStack.PopLayer(layer);
 	}
+
+	Application *Application::Instance = nullptr;
 }

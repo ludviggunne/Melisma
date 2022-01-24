@@ -33,12 +33,14 @@ namespace melisma {
 		virtual bool IsKeyPressed(KeyCode keyCode) final { return m_Window->IsKeyPressed(keyCode); }
 		// Melisma Todo: IsMousePressed
 
-		int GetWindowWidth() { return m_Window->GetWidth(); }
-		int GetWindowHeight() { return m_Window->GetHeight(); }
+		const Scope<Window> &GetWindow() const { return m_Window; }
 
 	protected:
 		bool m_Running;
-		Ref<Window> m_Window;
+		Scope<Window> m_Window;
 		LayerStack m_LayerStack;
+
+	public:
+		static Application *Instance;
 	};
 }
