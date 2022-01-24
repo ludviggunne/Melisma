@@ -25,6 +25,7 @@ namespace melisma {
 
 		void SetResizable(bool resizable) const;
 		void SetSize(int width, int height);
+		void Maximize();
 
 		void GetFrameBufferSize(int &width, int &height) const;
 		int GetWidth() const;

@@ -140,6 +140,11 @@ namespace melisma {
 		m_UserData.Height = height;
 	}
 
+	void Window::Maximize()
+	{
+		glfwMaximizeWindow((GLFWwindow *)m_NativeHandle);
+	}
+
 	void Window::GetFrameBufferSize(int &width, int &height) const
 	{
 		glfwGetFramebufferSize((GLFWwindow *)m_NativeHandle, &width, &height);
