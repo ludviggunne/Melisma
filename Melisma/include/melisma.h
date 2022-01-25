@@ -11,6 +11,7 @@ extern melisma::Application *CreateApplication();
 int main() {
 
 	melisma::Application::Instance = CreateApplication();
+	melisma::Application::Instance->Init(); // Melisma Todo: Implement console parameters for init
 	melisma::Application::Instance->Run();
 	delete melisma::Application::Instance;
 

@@ -23,6 +23,7 @@ namespace melisma {
 		Application(const Application &) = delete;
 		Application operator =(const Application &) = delete;
 
+		virtual void Init() = 0;
 		virtual void Run() final;
 		virtual void OnEvent(Event &) final;
 

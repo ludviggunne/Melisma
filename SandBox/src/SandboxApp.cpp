@@ -98,7 +98,9 @@ private:
 
 class SandboxApp : public Application {
 public:
-	SandboxApp() : Application() {
+	using Application::Application;
+
+	virtual void Init() override {
 		PushLayerTop(Ref<Layer>(new ParalaxLayer));
 	}
 };
