@@ -8,6 +8,5 @@ uniform sampler2D u_Textures[32];
 
 void main() {
 	vec4 texColor = texture(u_Textures[int(v_TexID)], v_TexCoord);
-	//if(texColor.a < 1.0) discard;
 	gl_FragColor = v_Color * texColor;
 }
