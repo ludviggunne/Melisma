@@ -8,7 +8,8 @@
 #include <vector>
 
 namespace melisma {
-
+	
+	// Melisma Todo: Implement OnRender, calls Layer::OnRender in reverse stack order
 	class melismaAPI LayerStack {
 	public:
 		LayerStack();
