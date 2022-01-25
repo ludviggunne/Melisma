@@ -1,0 +1,28 @@
+#pragma once
+#include "melisma/core.h"
+#include "melisma/delta_time.h"
+#include "melisma/event/event.h"
+#include "layer.h"
+#include "melisma/pointers.h"
+
+#include <vector>
+
+namespace melisma {
+	
+	// Melisma Todo: Implement OnRender, calls Layer::OnRender in reverse stack order
+	class melismaAPI LayerStack {
+	public:
+		LayerStack();
+
+		void PushLayerTop(Ref<Layer>);
+		void PushLayerBottom(Ref<Layer>);
+
+		Ref<Layer> PopLayer(Ref<Layer>);
+
+		bool OnEvent(Event &);
+		void OnUpdate(const DeltaTime &deltaTime = DeltaTime{});
+
+	private:
+		std::vector<Ref<Layer>> m_Layers;
+	};
+}
