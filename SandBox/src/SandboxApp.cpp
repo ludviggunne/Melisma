@@ -58,7 +58,9 @@ public:
 		Renderer2D::BeginScene(m_Camera);
 		
 		for (int i = 0; i < m_Textures.size(); i++) {
-			float offset = size * m_Hpos / (12 - i);
+			int offset = (int)(size * m_Hpos / (12 - i));
+			offset %= (int)(size * m_Textures[0]->Width());
+
 			Renderer2D::DrawTexturedQuad(glm::vec2(offset - size * m_Textures[0]->Width(), 0), m_Textures[i], size);
 			Renderer2D::DrawTexturedQuad(glm::vec2(offset, 0), m_Textures[i], size);
 			Renderer2D::DrawTexturedQuad(glm::vec2(offset + size * m_Textures[0]->Width(), 0), m_Textures[i], size);
