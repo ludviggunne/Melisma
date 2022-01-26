@@ -9,7 +9,6 @@
 
 namespace melisma {
 	
-	// Melisma Todo: Implement OnRender, calls Layer::OnRender in reverse stack order
 	class melismaAPI LayerStack {
 	public:
 		LayerStack();
@@ -21,6 +20,7 @@ namespace melisma {
 
 		bool OnEvent(Event &);
 		void OnUpdate(const DeltaTime &deltaTime = DeltaTime{});
+		void OnRender() const;
 
 	private:
 		std::vector<Ref<Layer>> m_Layers;

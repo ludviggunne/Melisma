@@ -22,15 +22,19 @@ namespace melisma {
 	void Application::Run()
 	{
 		using namespace std::chrono;
-
 		DeltaTime delta_time = 1.0f / 30;
 		
 		while (m_Running) {
+			// Begin frame timing
 			auto t_begin = high_resolution_clock::now();
 
+			// Update components and render
 			m_LayerStack.OnUpdate(delta_time);
 			m_Window->OnUpdate(delta_time);
 
+			m_LayerStack.OnRender();
+
+			// Calculate delta time
 			auto t_end = high_resolution_clock::now();
 			delta_time = duration<float>(t_begin - t_end).count();
 		}

@@ -19,6 +19,7 @@ namespace melisma {
 		virtual void OnDetach() {}
 
 		virtual void OnUpdate(const DeltaTime &) {}
+		virtual void OnRender() {}
 
 		virtual bool OnEvent(Event &) final;
 
