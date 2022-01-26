@@ -44,7 +44,6 @@ namespace melisma {
 	{
 		if (e.GetType() == EventType::WindowClose)
 		{
-			Renderer2D::ShutDown();
 			m_Running = false;
 
 			return;
