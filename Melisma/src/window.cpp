@@ -126,6 +126,7 @@ namespace melisma {
 		Renderer2D::ShutDown();
 		glfwTerminate();
 	}
+
 	void Window::OnUpdate(const DeltaTime &) const
 	{
 		glfwPollEvents();
