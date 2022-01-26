@@ -2,6 +2,7 @@
 #include "melisma/rendering/renderer2D.h"
 
 #include <functional>
+#include <chrono>
 
 // Melisma Todo: Remove this macro
 #define mlDispatchEventApplication(event_type_name)\
@@ -20,9 +21,18 @@ namespace melisma {
 
 	void Application::Run()
 	{
+		using namespace std::chrono;
+
+		DeltaTime delta_time = 1.0f / 30;
+		
 		while (m_Running) {
-			m_LayerStack.OnUpdate();
-			m_Window->OnUpdate();
+			auto t_begin = high_resolution_clock::now();
+
+			m_LayerStack.OnUpdate(delta_time);
+			m_Window->OnUpdate(delta_time);
+
+			auto t_end = high_resolution_clock::now();
+			delta_time = duration<float>(t_begin - t_end).count();
 		}
 	}
 
