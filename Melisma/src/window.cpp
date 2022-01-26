@@ -5,6 +5,8 @@
 #include "melisma/event/key_event.h"
 #include "melisma/event/mouse_event.h"
 
+#include "melisma/rendering/renderer2D.h"
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "..\include\melisma\window.h"
@@ -115,11 +117,13 @@ namespace melisma {
 			}
 			}
 		});
+
+		Renderer2D::Init();
 	}
 
 	Window::~Window()
 	{
-		mlLog("Window destructed");
+		Renderer2D::ShutDown();
 		glfwTerminate();
 	}
 	void Window::OnUpdate(const DeltaTime &) const
