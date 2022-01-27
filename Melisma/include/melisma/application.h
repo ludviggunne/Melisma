@@ -14,7 +14,6 @@
 namespace melisma {
 
 
-	// Melisma Todo: static application instance so that layers etc. can access window etc.
 	class melismaAPI Application {
 	public:
 		Application();

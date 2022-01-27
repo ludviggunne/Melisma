@@ -4,9 +4,6 @@
 
 namespace melisma {
 
-	// Melisma Todo: Global functions should be function pointers, initialized after application is created
-	// (in main). Initially they point to functions that always return false. Maybe bad idea, INDIRECTION.
-
 	bool IsKeyPressed(KeyCode keyCode) 
 	{
 		return Application::Instance->GetWindow()->IsKeyPressed(keyCode);

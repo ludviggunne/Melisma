@@ -10,7 +10,6 @@
 
 
 /* Implementation of 2D batch renderer */
-// Melisma Todo: Singleton
 namespace melisma {
 
 	struct Viewport {

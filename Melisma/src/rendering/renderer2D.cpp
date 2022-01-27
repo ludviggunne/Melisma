@@ -13,7 +13,7 @@
 namespace melisma {
 
 	struct RenderData {
-		Scope<VertexArrayObject> vertex_array; // Melisma Todo: Change to melisma::Scope
+		Scope<VertexArrayObject> vertex_array;
 		Viewport viewport;
 
 		// Textures
