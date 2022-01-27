@@ -42,7 +42,7 @@ namespace melisma {
 
 		static void SetViewport(Viewport);
 
-		static void BeginScene(const Camera &camera = Camera());
+		static void BeginScene(const Camera &camera);
 		static void EndScene();
 
 
