@@ -173,6 +173,11 @@ namespace melisma {
 		return m_UserData.Height;
 	}
 
+	Viewport Window::GetViewport() const
+	{
+		return Viewport(0, 0, GetWidth(), GetHeight());
+	}
+
 	bool Window::IsKeyPressed(KeyCode keyCode) const
 	{
 		return glfwGetKey((GLFWwindow *)m_NativeHandle, (int)keyCode);

@@ -9,6 +9,7 @@
 #include "input/keycodes.h"
 #include "input/mousecodes.h"
 #include "glm/glm.hpp"
+#include "rendering/viewport.h"
 
 namespace melisma {
 
@@ -31,6 +32,7 @@ namespace melisma {
 		void GetFrameBufferSize(int &width, int &height) const;
 		int GetWidth() const;
 		int GetHeight() const;
+		Viewport GetViewport() const;
 
 		bool IsKeyPressed(KeyCode keyCode) const;
 		bool IsMouseButtonPressed(MouseCode mouseCode) const;
