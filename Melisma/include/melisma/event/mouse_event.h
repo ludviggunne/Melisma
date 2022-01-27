@@ -2,6 +2,7 @@
 #include "event.h"
 
 #include "melisma/input/mousecodes.h"
+#include "glm/glm.hpp"
 
 namespace melisma{
 
@@ -28,7 +29,12 @@ namespace melisma{
 	
 	class melismaAPI MouseMovedEvent : public Event {
 	public:
+		MouseMovedEvent(int xpos, int ypos) : m_Position({ xpos, ypos }) {}
 		mlEventType(MouseMoved);
+
+		glm::ivec2 GetPos() const { return m_Position; }
+	private:
+		glm::ivec2 m_Position;
 	};
 
 	class melismaAPI MouseScrolledEvent : public Event {

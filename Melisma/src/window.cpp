@@ -118,6 +118,14 @@ namespace melisma {
 			}
 		});
 
+		/* MouseMovedEvent */
+		glfwSetCursorPosCallback((GLFWwindow *)m_NativeHandle, [](GLFWwindow *window, double xpos, double ypos) {
+			mlGetUserData(data, window);
+
+			MouseMovedEvent e(xpos, ypos);
+			data->EventCallback(e);
+		});
+
 		Renderer2D::Init();
 	}
 
