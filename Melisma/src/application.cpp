@@ -34,7 +34,7 @@ namespace melisma {
 
 			// Calculate delta time
 			auto t_end = high_resolution_clock::now();
-			delta_time = duration<float>(t_begin - t_end).count();
+			delta_time = duration<float>(t_end - t_begin).count();
 		}
 	}
 
