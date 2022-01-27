@@ -12,7 +12,7 @@ namespace melisma {
 	// Melisma Todo: Implement OnRender
 	class melismaAPI Layer { 
 	public:
-		Layer() : m_DebugName("melismaLayerDebugName0") {}
+		Layer() {}
 		virtual ~Layer() {}
 
 		virtual void OnAttach() {}
@@ -21,7 +21,7 @@ namespace melisma {
 		virtual void OnUpdate(const DeltaTime &) {}
 		virtual void OnRender() {}
 
-		virtual bool OnEvent(Event &) final;
+		bool OnEvent(Event &);
 
 		virtual bool OnWindowClose(WindowCloseEvent &)                  { return false; }
 		virtual bool OnWindowResize(WindowResizeEvent &)                { return false; }
@@ -38,8 +38,6 @@ namespace melisma {
 		virtual bool OnMouseMoved(MouseMovedEvent &)                    { return false; }
 		virtual bool OnMouseScrolled(MouseScrolledEvent &)              { return false; }
 
-	private:
-		const char *m_DebugName;
 	};
 
 }

@@ -23,15 +23,15 @@ namespace melisma {
 		Application operator =(const Application &) = delete;
 
 		virtual void Init() = 0;
-		virtual void Run() final;
-		virtual void OnEvent(Event &) final;
+		void Run();
+		void OnEvent(Event &);
 
-		virtual void PushLayerTop(Ref<Layer>) final;
-		virtual void PushLayerBottom(Ref<Layer>) final;
-		virtual Ref<Layer> PopLayer(Ref<Layer>) final;
+		void PushLayerTop(Ref<Layer>);
+		void PushLayerBottom(Ref<Layer>);
+		Ref<Layer> PopLayer(Ref<Layer>);
 
-		virtual bool IsKeyPressed(KeyCode keyCode) final { return m_Window->IsKeyPressed(keyCode); }
-		virtual bool IsMouseButtonPressed(MouseCode mouseCode) final { return m_Window->IsMouseButtonPressed(mouseCode); }
+		bool IsKeyPressed(KeyCode keyCode) { return m_Window->IsKeyPressed(keyCode); }
+		bool IsMouseButtonPressed(MouseCode mouseCode) { return m_Window->IsMouseButtonPressed(mouseCode); }
 
 		const Scope<Window> &GetWindow() const { return m_Window; }
 
