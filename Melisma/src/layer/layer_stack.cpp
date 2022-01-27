@@ -52,8 +52,8 @@ namespace melisma {
 	void LayerStack::OnRender() const
 	{
 		// Renders from bottom up
-		for (auto layer_ptr = m_Layers.rbegin(); layer_ptr != m_Layers.rend(); ++layer_ptr) {
-			(*layer_ptr)->OnRender();
+		for (auto layer_it = m_Layers.rbegin(); layer_it != m_Layers.rend(); ++layer_it) {
+			(*layer_it)->OnRender();
 		}
 	}
 

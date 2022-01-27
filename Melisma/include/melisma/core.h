@@ -10,14 +10,14 @@
 // Melisma Todo: implement debug features / logging (spdlog?)
 
 #ifdef ML_DEBUG
-	#define mlAssert(expr)				if(!(expr)) __debugbreak(); // Melisma Warning: __debugbreak is windows specific
-	#define mlAssertMsg(expr, errmsg)	if(!(expr)) { mlLog("[Melisma assert]: " << errmsg); __debugbreak(); }
-	#define mlVerify(expr)				if(!(expr))	__debugbreak();
-	#define mlVerifyMsg(expr, errmsg)	if(!(expr)) { mlLog("[Melisma verify]: " << errmsg); __debugbreak(); }
-	#define mlLog(msg)					std::cout << "[Melisma log]: " << msg << '\n';
+	#define mlAssert(expr)            if(!(expr)) __debugbreak(); // Melisma Warning: __debugbreak is windows specific
+	#define mlAssertMsg(expr, errmsg) if(!(expr)) { mlLog("[Melisma assert]: " << errmsg); __debugbreak(); }
+	#define mlVerify(expr)            if(!(expr)) __debugbreak();
+	#define mlVerifyMsg(expr, errmsg) if(!(expr)) { mlLog("[Melisma verify]: " << errmsg); __debugbreak(); }
+	#define mlLog(msg)                std::cout << "[Melisma log]: " << msg << '\n';
 	
-	#define mlDeclareDebugName			public: std::string _debugName
-	#define mlDefineDebugName(stream)   { std::stringstream s; s << stream; _debugName = s.str(); }
+	#define mlDeclareDebugName        public: std::string _debugName
+	#define mlDefineDebugName(stream) { std::stringstream s; s << stream; _debugName = s.str(); }
 #else
 	#define mlAssert(expr)
 	#define mlAssertMsg(expr, errmsg)

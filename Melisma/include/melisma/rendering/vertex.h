@@ -8,10 +8,10 @@
 namespace melisma {
 
 	struct Vertex {
-		glm::vec3	Position;
-		glm::vec2	TexCoord;
-		float		TexID;
-		glm::vec4	Color;
+		glm::vec3   Position;
+		glm::vec2   TexCoord;
+		float       TexID;
+		glm::vec4   Color;
 	};
 
 	template<typename VertexType>

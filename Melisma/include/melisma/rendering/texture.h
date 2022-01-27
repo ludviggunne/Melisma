@@ -4,9 +4,9 @@
 namespace melisma {
 
 	enum class Wrap {
-		Repeat		    = 0x2901,
-		ClampToEdge     = 0x812F,
-		MirroredRepeat  = 0x8370
+		Repeat         = 0x2901,
+		ClampToEdge    = 0x812F,
+		MirroredRepeat = 0x8370
 	};
 
 	enum class Filter {
@@ -15,44 +15,48 @@ namespace melisma {
 	};
 
 	enum class ColorSpace {
-		RGB = 0x1907,
+		RGB  = 0x1907,
 		RGBA = 0x1908
 	};
 
 	struct TextureSpecification {
-		ColorSpace colorSpace	= ColorSpace::RGB;
+		ColorSpace colorSpace = ColorSpace::RGB;
 
-		Filter magFilter		= Filter::Nearest;
-		Filter minFilter		= Filter::Nearest;
+		Filter magFilter = Filter::Nearest;
+		Filter minFilter = Filter::Nearest;
 
-		Wrap sWrap				= Wrap::Repeat;
-		Wrap tWrap				= Wrap::Repeat;
+		Wrap sWrap = Wrap::Repeat;
+		Wrap tWrap = Wrap::Repeat;
 
-		unsigned int hTiles		= 1;
-		unsigned int vTiles		= 1;
+		unsigned int hTiles = 1;
+		unsigned int vTiles = 1;
 	};
 
 	class melismaAPI Texture {
 	public:
-		Texture()							 = delete;
-		Texture(const Texture &)			 = delete;
-		Texture operator =(const Texture &)  = delete;
-		Texture(Texture &&)					 = delete;
-		Texture operator =(Texture &&)		 = delete;
+		Texture()                           = delete;
+		Texture(const Texture &)            = delete;
+		Texture operator =(const Texture &) = delete;
+		Texture(Texture &&)                 = delete;
+		Texture operator =(Texture &&)      = delete;
 
+		// Melisma Todo: Refactor constructors for less code duplication -----------
 		Texture(const char *filename, TextureSpecification spec);
 		Texture(const void *data, int width, int height, TextureSpecification spec);
+		// -------------------------------------------------------------------------
+
 		~Texture();
 
 		void BindToUnit(int unit);
 
-		int Width() const { return m_Width; }
+		int Width() const  { return m_Width; }
 		int Height() const { return m_Height; }
 
 		int HTiles() const { return m_hTiles; }
 		int VTiles() const { return m_vTiles; }
 
 	public:
+		// Melisma Todo: Async texture array creation. (Load raw data, GL-commands on main thread)
 
 	private:
 		unsigned int m_RendererID;

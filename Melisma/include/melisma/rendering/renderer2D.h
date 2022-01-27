@@ -29,8 +29,8 @@ namespace melisma {
 		static void Init();	   
 		static void ShutDown();
 
-		Renderer2D() = delete;
-		Renderer2D(const Renderer2D &) = delete;
+		Renderer2D()                               = delete;
+		Renderer2D(const Renderer2D &)             = delete;
 		Renderer2D operator = (const Renderer2D &) = delete;
 
 		static void SetBatchSize(uint32_t);
