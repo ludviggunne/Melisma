@@ -32,7 +32,7 @@ namespace melisma {
 		virtual Ref<Layer> PopLayer(Ref<Layer>) final;
 
 		virtual bool IsKeyPressed(KeyCode keyCode) final { return m_Window->IsKeyPressed(keyCode); }
-		// Melisma Todo: IsMousePressed
+		virtual bool IsMouseButtonPressed(MouseCode mouseCode) final { return m_Window->IsMouseButtonPressed(mouseCode); }
 
 		const Scope<Window> &GetWindow() const { return m_Window; }
 
