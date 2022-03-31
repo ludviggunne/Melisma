@@ -25,9 +25,6 @@ namespace melisma {
 
 	};
 
-	template<class E>
-	concept EventClass = std::is_base_of<Event, E>::value;
-
 	#define mlEventType(type) virtual EventType GetType() const override { return EventType::##type; }
 
 	// QUESTION: Use EventStatus enum for OnEvent return value?

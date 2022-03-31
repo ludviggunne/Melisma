@@ -1,13 +1,12 @@
 #include "melisma/layer/layer.h"
 
 #define mlDispatchEventLayer(event_type_name)\
-	case event_type_name: return On##event_type_name(static_cast<event_type_name##Event &>(e))
+	case EventType::##event_type_name: return On##event_type_name(static_cast<event_type_name##Event &>(e))
 
 namespace melisma {
 
 	bool Layer::OnEvent(Event &e) {
 
-		using enum EventType;
 		switch (e.GetType()) {
 			mlDispatchEventLayer(WindowClose);
 			mlDispatchEventLayer(WindowResize);
