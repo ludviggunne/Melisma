@@ -1,12 +1,3 @@
 # Directories
-.vs/
-bin/
-obj/
-Melisma/lib/
-Sandbox/debugdir/textures/
-
-# Files
-*.user
-*.sln
-*.filters
-*.vcxproj
+.vscode/
+build/
