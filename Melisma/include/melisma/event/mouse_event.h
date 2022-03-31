@@ -29,7 +29,7 @@ namespace melisma{
 	
 	class melismaAPI MouseMovedEvent : public Event {
 	public:
-		MouseMovedEvent(int xpos, int ypos) : m_Position({ xpos, ypos }) {}
+		MouseMovedEvent(int xpos, int ypos) : m_Position(glm::ivec2(xpos, ypos)) {}
 		mlEventType(MouseMoved);
 
 		glm::ivec2 GetPos() const { return m_Position; }

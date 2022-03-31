@@ -209,25 +209,25 @@ namespace melisma {
 		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos, 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut, vt + v_unit);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
-		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		s_Data.vertex_buffer_ptr->Color = glm::vec4(1, 1, 1, 1);
 		s_Data.vertex_buffer_ptr++;
 
 		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(size.x, 0), 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut + u_unit, vt + v_unit);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
-		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		s_Data.vertex_buffer_ptr->Color = glm::vec4(1, 1, 1, 1);
 		s_Data.vertex_buffer_ptr++;
 
 		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(0, size.y), 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut, vt);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
-		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		s_Data.vertex_buffer_ptr->Color = glm::vec4(1, 1, 1, 1);
 		s_Data.vertex_buffer_ptr++;
 
 		s_Data.vertex_buffer_ptr->Position = glm::vec3(pos + glm::vec2(size.x, size.y), 1.0f);
 		s_Data.vertex_buffer_ptr->TexCoord = glm::vec2(ut + u_unit, vt);
 		s_Data.vertex_buffer_ptr->TexID = texture_index;
-		s_Data.vertex_buffer_ptr->Color = { 1, 1, 1, 1 };
+		s_Data.vertex_buffer_ptr->Color = glm::vec4(1, 1, 1, 1);
 		s_Data.vertex_buffer_ptr++;
 
 		/* Indices */
