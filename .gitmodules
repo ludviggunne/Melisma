@@ -1,0 +1,6 @@
+[submodule "Melisma/dependencies/glfw"]
+	path = Melisma/dependencies/glfw
+	url = https://github.com/ludviggunne/glfw
+[submodule "Melisma/dependencies/glm"]
+	path = Melisma/dependencies/glm
+	url = https://github.com/ludviggunne/glm
